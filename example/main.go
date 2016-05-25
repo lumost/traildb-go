@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"reflect"
 
 	"github.com/lumost/traildb-go"
 )
@@ -49,10 +48,11 @@ func countSessions(db *tdb.TrailDB) {
 			//  then assert that it is reflect.Value
 			//  then use Interface() to get an interface for the value
 			/// then type assert to a pointer of the original WikiEvent type
-			parsedWikiEvent := evt.ToStruct(we).(reflect.Value).Interface().(*WikiEvent)
+			parsedWikiEvent := evt.ToStruct(we).(*WikiEvent)
 			if parsedWikiEvent.TimeStamp-prevTime > SESSION_LIMIT {
 				numSessions++
 			}
+			numEvents++
 			prevTime = parsedWikiEvent.TimeStamp
 		}
 		fmt.Printf("Number of Sessions: %d Number of Events: %d\n", numSessions, numEvents)

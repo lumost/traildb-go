@@ -391,5 +391,5 @@ func (evt *Event) ToStruct(data interface{}) interface{} {
 		value := C.GoStringN(itemValue, C.int(vlength))
 		v.Elem().Field(struct_field_ids[k]).SetString(value)
 	}
-	return v
+	return v.Interface()
 }
