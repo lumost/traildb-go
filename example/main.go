@@ -53,6 +53,7 @@ func countSessions(db *tdb.TrailDB) {
 			if parsedWikiEvent.TimeStamp-prevTime > SESSION_LIMIT {
 				numSessions++
 			}
+			numEvents++
 			prevTime = parsedWikiEvent.TimeStamp
 		}
 		fmt.Printf("Number of Sessions: %d Number of Events: %d\n", numSessions, numEvents)
